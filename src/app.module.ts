@@ -19,6 +19,7 @@ import { UserModule } from './user/user.module';
       entities: [
         User
       ],
+      synchronize: true
     }),
     UserModule
   ],
