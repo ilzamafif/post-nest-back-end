@@ -1,6 +1,6 @@
 import { IsEmail, IsOptional, IsString, MaxLength, MinLength } from "class-validator"
 
-export class UserDto {
+export class CreateUserDto {
   @IsOptional()
   id?: number
 
