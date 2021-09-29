@@ -4,7 +4,7 @@ import { getConnection } from 'typeorm';
 
 @ValidatorConstraint({ async: true })
 @Injectable()
-export class ExistValidator implements ValidatorConstraintInterface {
+export class UniqueValidator implements ValidatorConstraintInterface {
   async validate(value: any, args: ValidationArguments) {
     let find = {
       where: {
@@ -12,23 +12,23 @@ export class ExistValidator implements ValidatorConstraintInterface {
       }
     }
     let cek = await getConnection().getRepository(args.constraints[0]).findOne(find)
-    if (cek) return true
-    return false
+    if (cek) return false
+    return true
   }
   defaultMessage(args: ValidationArguments) {
-    return args.property + ' ' + args.value + ' tidak di temukan'
+    return args.property + ' ' + args.value + ' sudah di gunakan'
   }
 }
 
-export function IsExist(option: any, validationOption?: ValidationOptions) {
+export function IsUnique(option: any, validationOption?: ValidationOptions) {
   return function (object: any, propertyName: string) {
     registerDecorator({
-      name: 'IsExist',
+      name: 'IsUnique',
       target: object.constructor,
       propertyName: propertyName,
       constraints: option,
       options: validationOption,
-      validator: ExistValidator,
+      validator: UniqueValidator,
       async: true
     })
   }
