@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { ExistValidator } from './etc/validator/exist-validator';
 import { UniqueValidator } from './etc/validator/unique-validator';
 import { AuthModule } from './auth/auth.module';
+import { ProdukModule } from './produk/produk.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true
     }),
     UserModule,
-    AuthModule
+    AuthModule,
+    ProdukModule
   ],
   controllers: [AppController],
   providers: [AppService, ExistValidator, UniqueValidator],
