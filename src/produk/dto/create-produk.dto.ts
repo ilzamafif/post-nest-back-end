@@ -32,7 +32,7 @@ export class ProdukDto {
   @IsNumber()
   harga_jual: number
 
-  @ApiProperty()
+  @ApiProperty({ format: 'binary' })
   @IsString()
   foto: string
 
