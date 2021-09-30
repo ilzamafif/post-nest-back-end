@@ -14,6 +14,10 @@ import { KonsumenModule } from './konsumen/konsumen.module';
 import { Konsuman } from './konsumen/entities/konsuman.entity';
 import { RekeningModule } from './rekening/rekening.module';
 import { Rekening } from './rekening/entities/rekening.entity';
+import { PenjualanItem } from './penjualan/entities/penjualan-item.entity';
+import { Penjualan } from './penjualan/entities/penjualan.entity';
+import { PenjualanBayar } from './penjualan/entities/penjualan-bayar.entity';
+import { PenjualanModule } from './penjualan/penjualan.module';
 
 @Module({
   imports: [
@@ -38,7 +42,11 @@ import { Rekening } from './rekening/entities/rekening.entity';
     AuthModule,
     ProdukModule,
     KonsumenModule,
-    RekeningModule
+    RekeningModule,
+    Penjualan,
+    PenjualanBayar,
+    PenjualanItem,
+    PenjualanModule
   ],
   controllers: [AppController],
   providers: [AppService, ExistValidator, UniqueValidator],
