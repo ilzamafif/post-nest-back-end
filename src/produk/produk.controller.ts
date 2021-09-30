@@ -54,7 +54,7 @@ export class ProdukController {
     })
   }))
   @ApiConsumes('multipart/form-data')
-  @ApiBody({ type: CreateProdukDto })
+  @ApiBody({ type: UpdateProdukDto })
   update(@Param('id') id: string, @InjectUser() updateProdukDto: UpdateProdukDto, @UploadedFile() foto: Express.Multer.File) {
     if (foto) {
       updateProdukDto.foto = foto.filename

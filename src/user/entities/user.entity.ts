@@ -9,13 +9,13 @@ export class User {
   @Column()
   nama_user: string
 
-  @Column()
+  @Column({ unique: true })
   email: string
 
   @Column()
   username: string
 
-  @Column()
+  @Column({ select: false })
   password: string
 
   @CreateDateColumn()

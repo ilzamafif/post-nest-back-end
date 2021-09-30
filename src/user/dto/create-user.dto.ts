@@ -25,7 +25,7 @@ export class UserDto {
   @IsString()
   @MinLength(6)
   @MaxLength(50)
-  // @IsUnique([User, 'username'])
+  @IsUnique([User, 'username'])
   username: string
 
   @ApiProperty({ required: true })
