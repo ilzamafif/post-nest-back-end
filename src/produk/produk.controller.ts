@@ -6,6 +6,8 @@ import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { JwtGuard } from 'src/auth/jwt.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { InjectUser } from 'src/etc/decorator/inject-user.decorator';
+import { extname } from 'path';
 
 @ApiTags('Produk')
 @ApiBearerAuth()
@@ -17,12 +19,16 @@ export class ProdukController {
   @Post() //inteseptor dari nest(multer)
   @UseInterceptors(FileInterceptor('foto', {
     storage: diskStorage({
-      destination: './assets/produk'
+      destination: './assets/produk',
+      filename: (req: any, file, cb) => {
+        const namaFile = [req.user.id, Date.now()].join('-')
+        cb(null, namaFile + extname(file.originalname))
+      }
     })
   }))
   @ApiConsumes('multipart/form-data')
   @ApiBody({ type: CreateProdukDto })
-  create(@Body() createProdukDto: CreateProdukDto, @UploadedFile() foto: Express.Multer.File) {
+  create(@InjectUser() createProdukDto: CreateProdukDto, @UploadedFile() foto: Express.Multer.File) {
     createProdukDto.foto = foto.filename;
     return this.produkService.create(createProdukDto);
   }
@@ -38,7 +44,21 @@ export class ProdukController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProdukDto: UpdateProdukDto) {
+  @UseInterceptors(FileInterceptor('foto', {
+    storage: diskStorage({
+      destination: './assets/produk',
+      filename: (req: any, file, cb) => {
+        const namaFile = [req.user.id, Date.now()].join('-')
+        cb(null, namaFile + extname(file.originalname))
+      }
+    })
+  }))
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({ type: CreateProdukDto })
+  update(@Param('id') id: string, @InjectUser() updateProdukDto: UpdateProdukDto, @UploadedFile() foto: Express.Multer.File) {
+    if (foto) {
+      updateProdukDto.foto = foto.filename
+    }
     return this.produkService.update(+id, updateProdukDto);
   }
 
