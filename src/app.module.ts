@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { ProdukModule } from './produk/produk.module';
 import { Produk } from './produk/entities/produk.entity';
 import { KonsumenModule } from './konsumen/konsumen.module';
+import { Konsuman } from './konsumen/entities/konsuman.entity';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { KonsumenModule } from './konsumen/konsumen.module';
       entities: [
         User,
         Produk, // mendeklarasikan produk entity ke app.module
+        Konsuman, // mendeklarasikan konsumen entity ke app.module
       ],
       synchronize: true
     }),

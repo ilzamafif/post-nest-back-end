@@ -1,14 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { KonsumenService } from './konsumen.service';
-import { CreateKonsumanDto } from './dto/create-konsuman.dto';
+import { CreateKonsumanDto, KonsumanDto, KonsumanIdDto } from './dto/create-konsuman.dto';
 import { UpdateKonsumanDto } from './dto/update-konsuman.dto';
+import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
+import { JwtGuard } from 'src/auth/jwt.guard';
+import { InjectUser } from 'src/etc/decorator/inject-user.decorator';
 
+@ApiTags('Konsumen')
+@ApiBearerAuth()
+@UseGuards(JwtGuard)
 @Controller('konsumen')
 export class KonsumenController {
-  constructor(private readonly konsumenService: KonsumenService) {}
+  constructor(private readonly konsumenService: KonsumenService) { }
 
   @Post()
-  create(@Body() createKonsumanDto: CreateKonsumanDto) {
+  @ApiBody({ type: CreateKonsumanDto })
+  create(@InjectUser() createKonsumanDto: CreateKonsumanDto) {
     return this.konsumenService.create(createKonsumanDto);
   }
 
@@ -23,12 +30,13 @@ export class KonsumenController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateKonsumanDto: UpdateKonsumanDto) {
+  @ApiBody({ type: UpdateKonsumanDto })
+  update(@Param('id') id: string, @InjectUser() updateKonsumanDto: UpdateKonsumanDto) {
     return this.konsumenService.update(+id, updateKonsumanDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.konsumenService.remove(+id);
+  remove(@Param() id: KonsumanIdDto) {
+    return this.konsumenService.remove(id.id);
   }
 }
