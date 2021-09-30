@@ -1,9 +1,14 @@
 import { Module } from '@nestjs/common';
 import { ProdukService } from './produk.service';
 import { ProdukController } from './produk.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Produk } from './entities/produk.entity';
 
 @Module({
+  imports: [ // registrsikin entiti produk ke module
+    TypeOrmModule.forFeature([Produk])
+  ],
   controllers: [ProdukController],
-  providers: [ProdukService]
+  providers: [ProdukService],
 })
-export class ProdukModule {}
+export class ProdukModule { }

@@ -1,4 +1,5 @@
-import { Column, Entity, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, Entity, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, OneToMany } from "typeorm";
+import { Produk } from "src/produk/entities/produk.entity"; // import produk
 
 @Entity()
 export class User {
@@ -22,4 +23,7 @@ export class User {
 
   @UpdateDateColumn()
   update_up: Date
+
+  @OneToMany(() => Produk, prod => prod.id) // relasi ke produk
+  produk: Produk
 }
