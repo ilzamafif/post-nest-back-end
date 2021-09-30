@@ -13,6 +13,7 @@ import { Produk } from './produk/entities/produk.entity';
 import { KonsumenModule } from './konsumen/konsumen.module';
 import { Konsuman } from './konsumen/entities/konsuman.entity';
 import { RekeningModule } from './rekening/rekening.module';
+import { Rekening } from './rekening/entities/rekening.entity';
 
 @Module({
   imports: [
@@ -28,6 +29,8 @@ import { RekeningModule } from './rekening/rekening.module';
         User,
         Produk, // mendeklarasikan produk entity ke app.module
         Konsuman, // mendeklarasikan konsumen entity ke app.module
+        Konsuman, // mendeklarasikan konsumen entity ke app.module
+        Rekening, // mendeklarasikan rekening entity ke app.module
       ],
       synchronize: true
     }),

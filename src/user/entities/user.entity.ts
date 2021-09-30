@@ -1,6 +1,7 @@
 import { Column, Entity, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, OneToMany } from "typeorm";
 import { Produk } from "src/produk/entities/produk.entity"; // import produk
 import { Konsuman } from "src/konsumen/entities/konsuman.entity";
+import { Rekening } from "src/rekening/entities/rekening.entity";
 
 @Entity()
 export class User {
@@ -30,4 +31,7 @@ export class User {
 
   @OneToMany(() => Konsuman, kons => kons.id) // relasi ke konsumen
   Konsuman: Konsuman
+
+  @OneToMany(() => Rekening, rek => rek.id) // relasi ke rekening
+  Rekening: Rekening
 }
