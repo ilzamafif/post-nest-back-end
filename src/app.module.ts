@@ -12,6 +12,7 @@ import { ProdukModule } from './produk/produk.module';
 import { Produk } from './produk/entities/produk.entity';
 import { KonsumenModule } from './konsumen/konsumen.module';
 import { Konsuman } from './konsumen/entities/konsuman.entity';
+import { RekeningModule } from './rekening/rekening.module';
 
 @Module({
   imports: [
@@ -33,7 +34,8 @@ import { Konsuman } from './konsumen/entities/konsuman.entity';
     UserModule,
     AuthModule,
     ProdukModule,
-    KonsumenModule
+    KonsumenModule,
+    RekeningModule
   ],
   controllers: [AppController],
   providers: [AppService, ExistValidator, UniqueValidator],
