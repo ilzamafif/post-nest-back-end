@@ -19,6 +19,7 @@ export class KonsumenController {
     return this.konsumenService.create(createKonsumanDto);
   }
 
+  @Get()
   @ApiOkResponse({ type: ResponseKonsumenDto })
   findAll(@Query() filter: FindKonsumenDto) {
     return this.konsumenService.findAll(filter);
