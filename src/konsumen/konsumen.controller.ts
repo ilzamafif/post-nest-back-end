@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query } from '@nestjs/common';
 import { KonsumenService } from './konsumen.service';
-import { CreateKonsumanDto, KonsumanDto, KonsumanIdDto } from './dto/create-konsuman.dto';
+import { CreateKonsumanDto, FindKonsumenDto, KonsumanDto, KonsumanIdDto, ResponseKonsumenDto } from './dto/create-konsuman.dto';
 import { UpdateKonsumanDto } from './dto/update-konsuman.dto';
-import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { JwtGuard } from 'src/auth/jwt.guard';
 import { InjectUser } from 'src/etc/decorator/inject-user.decorator';
 
@@ -19,9 +19,9 @@ export class KonsumenController {
     return this.konsumenService.create(createKonsumanDto);
   }
 
-  @Get()
-  findAll() {
-    return this.konsumenService.findAll();
+  @ApiOkResponse({ type: ResponseKonsumenDto })
+  findAll(@Query() filter: FindKonsumenDto) {
+    return this.konsumenService.findAll(filter);
   }
 
   @Get(':id')
