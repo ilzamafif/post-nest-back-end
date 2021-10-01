@@ -18,6 +18,7 @@ import { PenjualanItem } from './penjualan/entities/penjualan-item.entity';
 import { Penjualan } from './penjualan/entities/penjualan.entity';
 import { PenjualanBayar } from './penjualan/entities/penjualan-bayar.entity';
 import { PenjualanModule } from './penjualan/penjualan.module';
+import { PageService } from './etc/service/page/page.service';
 
 @Module({
   imports: [
@@ -52,6 +53,6 @@ import { PenjualanModule } from './penjualan/penjualan.module';
     PenjualanModule
   ],
   controllers: [AppController],
-  providers: [AppService, ExistValidator, UniqueValidator],
+  providers: [AppService, ExistValidator, UniqueValidator, PageService],
 })
 export class AppModule { }
