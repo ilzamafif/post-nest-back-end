@@ -35,6 +35,9 @@ import { PenjualanModule } from './penjualan/penjualan.module';
         Konsuman, // mendeklarasikan konsumen entity ke app.module
         Konsuman, // mendeklarasikan konsumen entity ke app.module
         Rekening, // mendeklarasikan rekening entity ke app.module
+        Penjualan,
+        PenjualanItem,
+        PenjualanBayar,
       ],
       synchronize: true
     }),
